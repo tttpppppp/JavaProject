@@ -5,12 +5,14 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import org.example.projectjava.config.MysqlConnect;
+import org.example.projectjava.model.Rooms;
 import org.example.projectjava.service.UserService;
 
 import java.io.IOException;
 import java.sql.Connection;
 
 public class HelloApplication extends Application {
+
     @Override
     public void start(Stage stage) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("login.fxml"));
@@ -28,6 +30,11 @@ public class HelloApplication extends Application {
             }
         } catch (Exception e) {
 
+        }
+
+        UserService userService = new UserService();
+        for (Rooms rooms : userService.getAllRooms()) {
+            System.out.println(rooms.getRoom_id() + rooms.getRoom_type_name());
         }
         launch();
     }
